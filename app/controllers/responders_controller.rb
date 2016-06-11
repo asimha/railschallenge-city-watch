@@ -9,6 +9,15 @@ class RespondersController < ApplicationController
     render json: { responders: @responders }.to_json, status: 200
   end
 
+  def show
+    @responder = Responder.find_by_name(params[:name])
+    if @responder.present?
+      render json: { responder: @responder }, status: 201
+    else
+      render json: {}, status: 404
+    end
+  end
+
   def edit
     render json: { message: 'page not found' }.to_json, status: 404
   end
