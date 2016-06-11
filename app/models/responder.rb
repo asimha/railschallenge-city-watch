@@ -6,7 +6,7 @@ class Responder < ActiveRecord::Base
 
   EXCLUDED_JSON_ATTRIBUTES = [:id, :created_at, :updated_at]
 
-  def as_json(options={})
+  def as_json(options = {})
     exclusion_list = []
     exclusion_list += EXCLUDED_JSON_ATTRIBUTES
     options[:except] ||= exclusion_list
