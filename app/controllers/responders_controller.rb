@@ -51,7 +51,7 @@ class RespondersController < ApplicationController
   end
 
   def responder_update_params
-    params.require(:responder).permit(:type, :name, :capacity, :on_duty)
+    params.require(:responder).permit(:on_duty)
   end
 
   def catch_unpermitted_params
