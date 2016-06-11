@@ -1,4 +1,4 @@
-class EmergenciesController < ApplicationController
+class RespondersController < ApplicationController
   def new
     render json: { message: 'page not found' }.to_json, status: 404
   end
