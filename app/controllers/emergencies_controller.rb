@@ -5,7 +5,7 @@ class EmergenciesController < ApplicationController
   end
 
   def show
-  @emergency = Emergency.find_by_code(params[:code])
+    @emergency = Emergency.find_by_code(params[:code])
     if @emergency.present?
       render json: { emergency: @emergency }, status: 201
     else
@@ -30,10 +30,23 @@ class EmergenciesController < ApplicationController
     end
   end
 
+  def update
+    @emergency = Emergency.find_by_code(params[:code])
+    if @emergency.update_attributes(emergency_update_params)
+      render json: { emergency: @emergency }, status: 201
+    else
+      render json: { message: @emergency.errors.messages }, status: 422
+    end
+  end
+
   private
 
   def emergency_params
     params.require(:emergency).permit(:code, :fire_severity, :police_severity, :medical_severity)
+  end
+
+  def emergency_update_params
+    params.require(:emergency).permit(:fire_severity, :police_severity, :medical_severity, :resolved_at)
   end
 
   def catch_unpermitted_params
